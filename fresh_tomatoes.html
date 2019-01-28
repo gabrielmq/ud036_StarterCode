@@ -1,10 +1,4 @@
-import webbrowser
-import os
-import re
 
-
-# Styles and scripting for the page
-main_page_head = '''
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -156,11 +150,7 @@ main_page_head = '''
         });
     </script>
 </head>
-'''
 
-
-# The main page layout and title bar
-main_page_content = '''
   <body>
     <!-- Trailer Video Modal -->
     <div class="modal" id="trailer">
@@ -192,30 +182,22 @@ main_page_content = '''
       </div>
     </div>
     <div class="container">
-      {movie_tiles}
-    </div>
-  </body>
-</html>
-'''
-
-
-# A single movie entry html template
-movie_tile_content = '''
+      
     <div class="col-md-6 col-lg-4 movie-tile text-center">
         <div class="card" style="height: 545px;">
             <img class="card-img img-fluid" 
-                src="{poster_image_url}" 
+                src="https://upload.wikimedia.org/wikipedia/en/4/4d/Avengers_Infinity_War_poster.jpg" 
                 width="220" height="342" 
-                alt="{movie_title}">
+                alt="Avengers: Infinity War">
             <div class="card-body poster_image">
                 <div class="text-info">
-                    <h2 class="card-title">{movie_title}</h2>
-                    <h4 class="card-text">Director: {director}</h4>
-                    <h4 class="card-text">Release Date: {release_date}</h4>
-                    <h4 class="card-text">Runinng Time: {runtime}</h4>
+                    <h2 class="card-title">Avengers: Infinity War</h2>
+                    <h4 class="card-text">Director: Anthony Russo, Joe Russo</h4>
+                    <h4 class="card-text">Release Date: 26 Apr 2018 (Brazil)</h4>
+                    <h4 class="card-text">Runinng Time: 149 min</h4>
                     <a href="#trailer" 
                         class="btn btn-link btn-lg show-trailer-bg-color"
-                        data-trailer-youtube-id="{trailer_youtube_id}" 
+                        data-trailer-youtube-id="6ZfuNTqbHE8" 
                         data-toggle="modal" data-target="#trailer">
                         Show Trailer
                     </a>
@@ -223,45 +205,99 @@ movie_tile_content = '''
             </div>
         </div>
     </div>
-'''
 
+    <div class="col-md-6 col-lg-4 movie-tile text-center">
+        <div class="card" style="height: 545px;">
+            <img class="card-img img-fluid" 
+                src="https://upload.wikimedia.org/wikipedia/pt/2/2d/Filme_Logan_2017.jpg" 
+                width="220" height="342" 
+                alt="Logan">
+            <div class="card-body poster_image">
+                <div class="text-info">
+                    <h2 class="card-title">Logan</h2>
+                    <h4 class="card-text">Director: James Mangold</h4>
+                    <h4 class="card-text">Release Date: 2 Mar 2017 (Brazil)</h4>
+                    <h4 class="card-text">Runinng Time: 137 min</h4>
+                    <a href="#trailer" 
+                        class="btn btn-link btn-lg show-trailer-bg-color"
+                        data-trailer-youtube-id="KPND6SgkN7Q" 
+                        data-toggle="modal" data-target="#trailer">
+                        Show Trailer
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-def create_movie_tiles_content(movies):
-    # The HTML content for this section of the page
-    content = ''
-    for movie in movies:
-        # Extract the youtube ID from the url
-        youtube_id_match = re.search(
-            r'(?<=v=)[^&#]+', movie.trailer_youtube_url)
-        youtube_id_match = youtube_id_match or re.search(
-            r'(?<=be/)[^&#]+', movie.trailer_youtube_url)
-        trailer_youtube_id = (youtube_id_match.group(0) if youtube_id_match
-                              else None)
+    <div class="col-md-6 col-lg-4 movie-tile text-center">
+        <div class="card" style="height: 545px;">
+            <img class="card-img img-fluid" 
+                src="https://upload.wikimedia.org/wikipedia/pt/thumb/5/5c/The_Empire_Strikes_Back.jpg/250px-The_Empire_Strikes_Back.jpg" 
+                width="220" height="342" 
+                alt="Star Wars: Episode V">
+            <div class="card-body poster_image">
+                <div class="text-info">
+                    <h2 class="card-title">Star Wars: Episode V</h2>
+                    <h4 class="card-text">Director: Irvin Kershner</h4>
+                    <h4 class="card-text">Release Date: 21 Jul 1980 (Brazil)</h4>
+                    <h4 class="card-text">Runinng Time: 124 min</h4>
+                    <a href="#trailer" 
+                        class="btn btn-link btn-lg show-trailer-bg-color"
+                        data-trailer-youtube-id="JNwNXF9Y6kY" 
+                        data-toggle="modal" data-target="#trailer">
+                        Show Trailer
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        # Append the tile for the movie with its content filled in
-        content += movie_tile_content.format(
-            movie_title=movie.title,
-            poster_image_url=movie.poster_image_url,
-            trailer_youtube_id=trailer_youtube_id,
-            director=movie.director,
-            release_date=movie.release_date,
-            runtime=movie.runtime
-        )
-    return content
+    <div class="col-md-6 col-lg-4 movie-tile text-center">
+        <div class="card" style="height: 545px;">
+            <img class="card-img img-fluid" 
+                src="https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg" 
+                width="220" height="342" 
+                alt="The Godfather">
+            <div class="card-body poster_image">
+                <div class="text-info">
+                    <h2 class="card-title">The Godfather</h2>
+                    <h4 class="card-text">Director: Francis Ford Coppola</h4>
+                    <h4 class="card-text">Release Date: 10 Sep 1972 (Brazil)</h4>
+                    <h4 class="card-text">Runinng Time: 175 min</h4>
+                    <a href="#trailer" 
+                        class="btn btn-link btn-lg show-trailer-bg-color"
+                        data-trailer-youtube-id="lLThoR1S0QQ" 
+                        data-toggle="modal" data-target="#trailer">
+                        Show Trailer
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="col-md-6 col-lg-4 movie-tile text-center">
+        <div class="card" style="height: 545px;">
+            <img class="card-img img-fluid" 
+                src="https://m.media-amazon.com/images/M/MV5BN2EyZjM3NzUtNWUzMi00MTgxLWI0NTctMzY4M2VlOTdjZWRiXkEyXkFqcGdeQXVyNDUzOTQ5MjY@._V1_SY999_CR0,0,673,999_AL_.jpg" 
+                width="220" height="342" 
+                alt="The Lord of the Rings">
+            <div class="card-body poster_image">
+                <div class="text-info">
+                    <h2 class="card-title">The Lord of the Rings</h2>
+                    <h4 class="card-text">Director: Peter Jackson</h4>
+                    <h4 class="card-text">Release Date: 1 Jan 2002 (Brazil)</h4>
+                    <h4 class="card-text">Runinng Time: 178 min</h4>
+                    <a href="#trailer" 
+                        class="btn btn-link btn-lg show-trailer-bg-color"
+                        data-trailer-youtube-id="IUerKBZHnBs" 
+                        data-toggle="modal" data-target="#trailer">
+                        Show Trailer
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-def open_movies_page(movies):
-    # Create or overwrite the output file
-    output_file = open('fresh_tomatoes.html', 'w')
-
-    # Replace the movie tiles placeholder generated content
-    rendered_content = main_page_content.format(
-        movie_tiles=create_movie_tiles_content(movies))
-
-    # Output the file
-    output_file.write(main_page_head + rendered_content)
-    output_file.close()
-
-    # open the output file in the browser (in a new tab, if possible)
-    url = os.path.abspath(output_file.name)
-    webbrowser.open(url, new=2)
+    </div>
+  </body>
+</html>
