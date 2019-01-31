@@ -1,4 +1,4 @@
-# Fresh Tomatoes Movie Trailers 
+# Movie Trailer Website 
 
 Este projeto é um site com uma lista de alguns dos meus filmes favoritos. Também é possivel assistir aos trailer
 passando o mouse por cima do poster e clicando no link show trailer.
